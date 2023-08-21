@@ -1,165 +1,70 @@
-/* Reset default styles */
-body, h1, h2, h3, p, ul {
-    margin: 0;
-    padding: 0;
-}
+import React, { useEffect } from "react";
+import { gsap } from "gsap";
+import "./styles.css"; // Add your CSS file path here
 
-/* Global styles */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f7f7f7;
-    color: #333;
-}
+const App = () => {
+  useEffect(() => {
+    // Animation for header
+    gsap.from("header", { opacity: 0, duration: 1, y: -50, ease: "power2.out" });
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
+    // Animations for sections
+    const sections = ["about", "projects", "skills", "contact"];
+    sections.forEach((section, index) => {
+      gsap.from(`#${section}`, { opacity: 0, duration: 1, y: -50, delay: index * 0.2 + 0.2, ease: "power2.out" });
+    });
 
-/* Header styles */
-header {
-    background-color: #007bff;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
+    // Animation for project cards on hover
+    const projectCards = document.querySelectorAll(".project");
+    projectCards.forEach((card) => {
+      card.addEventListener("mouseover", () => {
+        gsap.to(card, { y: -10, duration: 0.2, ease: "power2.out" });
+      });
 
-header h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-.social-icons a img {
-    width: 30px;
-    height: 30px;
-    margin: 0 5px;
-}
+      card.addEventListener("mouseout", () => {
+        gsap.to(card, { y: 0, duration: 0.2, ease: "power2.out" });
+      });
+    });
+  }, []);
 
-header p {
-    font-size: 18px;
-    font-weight: 300;
-}
+  return (
+    <div className="App">
+      <header>
+        <h1>Alexander Trimnell</h1>
+        <p>Founder of TechUnified by Ratio, CO Founder of Merchaven</p>
+      </header>
+      <section id="about">
+        <h2>About Me</h2>
+        <p>I'm a passionate software developer and web developer...</p>
+      </section>
+      <section id="projects">
+        <h2>Projects</h2>
+        <div className="project">
+          <h3>TechUnified Platform</h3>
+          <p>Developed a revolutionary platform that connects tech enthusiasts...</p>
+        </div>
+        {/* More project cards */}
+      </section>
+      <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+          <li>Software Development</li>
+          <li>Web Development</li>
+          <li>Marketing Strategy</li>
+          <li>Copywriting</li>
+        </ul>
+      </section>
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Feel free to reach out to me at:</p>
+        <p><a href="tel:+2348159338739">+234 815 9338 739</a></p>
+        <p>Email: <a href="mailto:alexctrimnell@gmail.com">alexctrimnell@gmail.com</a></p>
+      </section>
+      <footer>
+        <p>&copy; 2023 Alexander Trimnell. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+};
 
-/* Section styles */
-section {
-    padding: 40px 0;
-}
-
-/* About section styles */
-#about {
-    background-color: #fff;
-    text-align: center;
-}
-
-#about h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-#about p {
-    font-size: 16px;
-    line-height: 1.8;
-    margin-bottom: 40px;
-}
-
-/* Projects section styles */
-#projects {
-    background-color: #f7f7f7;
-    text-align: center;
-}
-
-#projects h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-.project {
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-}
-
-.project:hover {
-    transform: translateY(-5px);
-}
-
-.project h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.project p {
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-/* Skills section styles */
-#skills {
-    text-align: center;
-}
-
-#skills h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-#skills ul {
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-#skills li {
-    font-size: 16px;
-    margin: 10px;
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 20px;
-}
-
-/* Contact section styles */
-#contact {
-    background-color: #fff;
-    text-align: center;
-}
-
-#contact h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-#contact p {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-#contact a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-/* Footer styles */
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-}
-
-/* Links styles */
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-/* Phone number link style */
-a[href^="tel:"] {
-    color: #28a745;
-}
+export default App;
 
